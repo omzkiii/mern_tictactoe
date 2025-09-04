@@ -1,103 +1,95 @@
-import Image from "next/image";
+"use client";
+import { useContext, useState } from "react";
+import { PlayersContext } from "./layout";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const playerContext = useContext(PlayersContext);
+  if (!playerContext) {
+    throw new Error("useContext must be used inside PlayersProvider");
+  }
+  const { players, setPlayers } = playerContext;
+  const [player1, setPlayer1] = useState("");
+  const [player2, setPlayer2] = useState("");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  function handleStart() {
+    if (!player1 || !player2) {
+      alert("Please enter names");
+      return;
+    }
+    const newPlayers = [player1, player2];
+    setPlayers(newPlayers);
+  }
+  return (
+    <div className="font-sans flex flex-col items-center justify-center min-h-screen gap-6 bg-gradient-to-br from-cyan-300 to-rose-300">
+      <div
+        className="
+        flex flex-col 
+        gap-7
+        p-24 rounded-2xl 
+        bg-white/10 backdrop-blur-lg 
+        border border-white/20 
+        shadow-lg
+        z-1"
+      >
+        {/* Player 1 */}
+        <div className="bg-blue-500 text-white p-6 rounded-2xl shadow-lg w-80 text-center">
+          <label htmlFor="p1name" className="block text-lg font-semibold mb-2">
+            Player 1
+          </label>
+          <input
+            type="text"
+            id="p1name"
+            name="p1name"
+            placeholder="Enter name..."
+            className="w-full px-4 py-2 rounded-lg border border-white/50 focus:outline-none focus:ring-2 focus:ring-blue-300 text-black"
+            value={player1}
+            onChange={(e) => setPlayer1(e.target.value)}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        {/* Player 2 */}
+        <div className="bg-amber-500 text-white p-6 rounded-2xl shadow-lg w-80 text-center">
+          <label htmlFor="p2name" className="block text-lg font-semibold mb-2">
+            Player 2
+          </label>
+          <input
+            type="text"
+            id="p2name"
+            name="p2name"
+            placeholder="Enter name..."
+            className="w-full px-4 py-2 rounded-lg border border-white/50 focus:outline-none focus:ring-2 focus:ring-amber-300 text-black"
+            value={player2}
+            onChange={(e) => setPlayer2(e.target.value)}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        </div>
+        <button
+          className="px-6 py-3 rounded-xl font-semibold text-white 
+               bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500 
+               shadow-lg hover:scale-105 hover:shadow-xl 
+               transition-all duration-300"
+          onClick={() => {
+            handleStart();
+          }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Start Game
+        </button>
+      </div>
+      <div className="absolute left-[5vw] rounded-full bg-amber-200 z-0 animate-[slideDown_17s_ease-in-out_infinite] blur-sm h-25 w-25"></div>
+      <div className="absolute left-[10vw] rounded-full bg-amber-100 z-0 animate-[slideDown_32s_ease-in-out_infinite] blur-sm h-32 w-32"></div>
+      <div className="absolute left-[20vw] rounded-full bg-amber-100 z-0 animate-[slideDown_30s_ease-in-out_infinite] blur-lg h-12 w-12"></div>
+      <div className="absolute left-[30vw] rounded-full bg-amber-100 z-0 animate-[slideDown_20s_ease-in-out_infinite] blur-sm h-23 w-23"></div>
+      <div className="absolute left-[40vw] rounded-full bg-amber-100 z-0 animate-[slideDown_15s_ease-in-out_infinite] blur-sm h-17 w-17"></div>
+      <div className="absolute left-[45vw] rounded-full bg-amber-100 z-0 animate-[slideDown_31s_ease-in-out_infinite] blur-sm h-17 w-17"></div>
+      <div className="absolute left-[45vw] rounded-full bg-amber-100 z-0 animate-[slideDown_11s_ease-in-out_infinite] blur-sm h-17 w-17"></div>
+      <div className="absolute left-[50vw] rounded-full bg-amber-100 z-0 animate-[slideDown_19s_ease-in-out_infinite] blur-md h-24 w-24"></div>
+      <div className="absolute left-[50vw] rounded-full bg-amber-100 z-0 animate-[slideDown_30s_ease-in-out_infinite] blur-md h-24 w-24"></div>
+      <div className="absolute left-[55vw] rounded-full bg-amber-100 z-0 animate-[slideDown_20s_ease-in-out_infinite] blur-sm h-23 w-23"></div>
+      <div className="absolute left-[55vw] rounded-full bg-amber-100 z-0 animate-[slideDown_9s_ease-in-out_infinite] blur-sm h-23 w-23"></div>
+      <div className="absolute left-[60vw] rounded-full bg-amber-100 z-0 animate-[slideDown_24s_ease-in-out_infinite] blur-xl h-40 w-40"></div>
+      <div className="absolute left-[70vw] rounded-full bg-amber-100 z-0 animate-[slideDown_26s_ease-in-out_infinite] blur-lg h-27 w-27"></div>
+      <div className="absolute left-[80vw] rounded-full bg-amber-100 z-0 animate-[slideDown_28s_ease-in-out_infinite] blur-sm h-29 w-29"></div>
+      <div className="absolute left-[90vw] rounded-full bg-amber-100 z-0 animate-[slideDown_35s_ease-in-out_infinite] blur-md h-21 w-21"></div>
+      <div className="absolute left-[95vw] rounded-full bg-amber-100 z-0 animate-[slideDown_17s_ease-in-out_infinite] blur-lg h-19 w-19"></div>
     </div>
   );
 }

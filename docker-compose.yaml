@@ -26,6 +26,24 @@ services:
       - /app/node_modules
     networks:
       - mern-ttt
+
+  db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mypass
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo:mypass@db:27017/
+      ME_CONFIG_BASICAUTH_ENABLED: true
+      ME_CONFIG_BASICAUTH_USERNAME: mongo
+      ME_CONFIG_BASICAUTH_PASSWORD: mypass
 networks:
   mern-ttt:
     driver: bridge
