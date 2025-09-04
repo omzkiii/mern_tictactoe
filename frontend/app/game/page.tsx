@@ -86,7 +86,7 @@ export default function Game() {
   }
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-center font-sans p-6 transition-colors duration-700 transition-all duration-2000 ease-in-out opacity-0 animate-fadeIn ${
+      className={`min-h-screen flex flex-col items-center justify-center font-sans p-6 transition-colors duration-2000 ease-in-out opacity-0 animate-fadeIn ${
         activePlayer.symbol === "X"
           ? "bg-gradient-to-br from-pink-500 via-rose-500 to-red-500"
           : "bg-gradient-to-br from-blue-200 via-cyan-500 to-sky-700"

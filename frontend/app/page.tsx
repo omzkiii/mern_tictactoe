@@ -2,6 +2,7 @@
 import { useContext, useState } from "react";
 import { PlayersContext } from "./layout";
 import { useRouter } from "next/navigation";
+import Matches from "@/components/Matches";
 
 export default function Home() {
   const router = useRouter();
@@ -12,6 +13,7 @@ export default function Home() {
   const { players, setPlayers } = playerContext;
   const [player1, setPlayer1] = useState("");
   const [player2, setPlayer2] = useState("");
+  const [matches, setMatches] = useState(false);
 
   function handleStart() {
     if (!player1 || !player2) {
@@ -116,6 +118,17 @@ export default function Home() {
             Start Game
           </span>
         </button>
+        <button
+          onClick={() => {
+            setMatches(true);
+          }}
+          className="py-3 rounded-2xl font-bold text-white text-md
+                   bg-gradient-to-r from-amber-400 via-red-500 to-pink-500
+                   shadow-lg shadow-pink-900/40 hover:scale-110 hover:shadow-2xl
+                   transition-all duration-300"
+        >
+          Matches
+        </button>
       </div>
       <div className="left-[5vw] particle animate-[slideDown_17s_ease-in-out_infinite]  h-25 w-25">
         X
@@ -165,6 +178,8 @@ export default function Home() {
       <div className="left-[95vw] particle  animate-[slideDown_17s_ease-in-out_infinite]  h-19 w-19">
         O
       </div>
+
+      {matches ? <Matches setMatches={setMatches} /> : null}
     </div>
   );
 }

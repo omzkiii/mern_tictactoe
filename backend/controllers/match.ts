@@ -4,6 +4,7 @@ type Match = {
   player1: { name: string; score: number };
   player2: { name: string; score: number };
   winner: string;
+  time: string;
 };
 
 export async function saveMatch(match: Match) {

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import { Match, saveData } from "@/controllers/saveData";
+import { Match, saveData } from "@/controllers/match";
 import { PlayerStats } from "@/app/game/page";
 type FloatingProps = {
   win: string | null;
@@ -17,6 +17,7 @@ export default function Floating({
 }: FloatingProps) {
   function save() {
     const winner = player1.score > player2.score ? player1.name : player2.name;
+    const now = new Date();
     const matchData: Match = {
       player1: {
         name: player1.name,
@@ -27,6 +28,7 @@ export default function Floating({
         score: player2.score,
       },
       winner: winner,
+      time: now.toLocaleString(),
     };
     saveData(matchData);
   }

@@ -16,9 +16,9 @@ app.use(
     credentials: false,
   }),
 );
-app.get("/", async (req: Request, res: Response) => {
-  console.log(await getMatches());
-  res.send("hi");
+app.get("/getMatches", async (req: Request, res: Response) => {
+  const matches = await getMatches();
+  return res.json(matches);
 });
 app.post("/saveMatch", (req: Request, res: Response) => {
   const match = req.body;
