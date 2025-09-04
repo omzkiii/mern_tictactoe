@@ -135,21 +135,21 @@ export default function Home() {
       <div className="left-[45vw] particle  animate-[slideDown_31s_ease-in-out_infinite]  h-17 w-17">
         O
       </div>
-      <div className="left-[45vw] particle  animate-[slideDown_11s_ease-in-out_infinite]  h-17 w-17">
-        X
-      </div>
-      <div className="left-[50vw] particle  animate-[slideDown_19s_ease-in-out_infinite]  h-24 w-24">
-        O
-      </div>
+      {/* <div className="left-[45vw] particle  animate-[slideDown_11s_ease-in-out_infinite]  h-17 w-17"> */}
+      {/*   X */}
+      {/* </div> */}
+      {/* <div className="left-[50vw] particle  animate-[slideDown_19s_ease-in-out_infinite]  h-24 w-24"> */}
+      {/*   O */}
+      {/* </div> */}
       <div className="left-[50vw] particle  animate-[slideDown_30s_ease-in-out_infinite]  h-24 w-24">
         X
       </div>
       <div className="left-[55vw] particle  animate-[slideDown_20s_ease-in-out_infinite]  h-23 w-23">
         O
       </div>
-      <div className="left-[55vw] particle  animate-[slideDown_9s_ease-in-out_infinite]   h-23 w-23">
-        X
-      </div>
+      {/* <div className="left-[55vw] particle  animate-[slideDown_9s_ease-in-out_infinite]   h-23 w-23"> */}
+      {/*   X */}
+      {/* </div> */}
       <div className="left-[60vw] particle  animate-[slideDown_24s_ease-in-out_infinite]  h-40 w-40">
         O
       </div>

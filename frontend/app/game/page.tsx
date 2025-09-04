@@ -1,9 +1,11 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PlayersContext } from "../layout";
 import { checkWin } from "@/controllers/checkWin";
 import Floating from "@/components/Floating";
 import Scoreboard from "@/components/Scoreboard";
+import { useRouter } from "next/navigation";
+
 export type PlayerStats = {
   name: string;
   symbol: string;
@@ -11,12 +13,17 @@ export type PlayerStats = {
 };
 
 export default function Game() {
+  useEffect(() => {
+    if (players.length < 2) {
+      router.push("/");
+    }
+  }, []);
+  const router = useRouter();
   const playerContext = useContext(PlayersContext);
   if (!playerContext) {
     throw new Error("useContext must be used inside PlayersProvider");
   }
   const { players, setPlayers } = playerContext;
-  // const [players, setPlayers] = useState(["paul", "polycarp"]);
   const [player1, setPlayer1] = useState<PlayerStats>({
     name: players[0],
     symbol: "X",
@@ -120,7 +127,12 @@ export default function Game() {
       <p className="mt-8 text-lg md:text-2xl font-bold text-white uppercase animate-pulse">
         {`${activePlayer.name}'s turn`}
       </p>
-      <Floating win={win ?? null} setWin={setWin} />
+      <Floating
+        win={win ?? null}
+        setWin={setWin}
+        player1={player1}
+        player2={player2}
+      />
     </div>
   );
 }
