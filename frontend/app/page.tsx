@@ -15,7 +15,11 @@ export default function Home() {
 
   function handleStart() {
     if (!player1 || !player2) {
-      alert("Please enter names");
+      alert("Please enter names (˶ᵔ ᵕ ᵔ˶)");
+      return;
+    }
+    if (player1.length > 12 || player2.length > 12) {
+      alert("Please enter shorter name ≽ ^ • ⩊ • ^ ≼");
       return;
     }
     const newPlayers = [player1, player2];
@@ -25,7 +29,8 @@ export default function Home() {
   return (
     <div
       className="relative font-sans flex flex-col items-center justify-center min-h-screen gap-6 
-                bg-gradient-to-br from-cyan-500 via-purple-500 to-rose-700 overflow-hidden"
+                bg-gradient-to-br from-cyan-500 via-purple-500 to-rose-700 overflow-hidden
+                transition-all duration-2000 ease-in-out opacity-0 animate-fadeIn "
     >
       <div
         className="

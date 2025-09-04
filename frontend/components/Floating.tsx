@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
-
+import { useRouter } from "next/navigation";
 type FloatingProps = {
   win: string | null;
   setWin: Dispatch<SetStateAction<string | null | undefined>>;
 };
 
 export default function Floating({ win, setWin }: FloatingProps) {
+  const router = useRouter();
   return (
     <div>
       {win && (
@@ -18,12 +19,12 @@ export default function Floating({ win, setWin }: FloatingProps) {
             <div className="absolute -top-6 -left-6 w-16 h-16 bg-cyan-400 rounded-full blur-xl opacity-70 animate-pulse"></div>
             <div className="absolute -bottom-8 -right-8 w-20 h-20 bg-yellow-400 rounded-full blur-xl opacity-70 animate-ping"></div>
 
-            <h2
-              className="text-4xl md:text-5xl font-extrabold tracking-tight 
+            <h1
+              className="text-4xl md:text-5xl font-extrabold tracking-tight uppercase
                        text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.7)] mb-6"
             >
               {win === "draw" ? "DRAW!" : `${win} WINS!`}
-            </h2>
+            </h1>
 
             <p className="text-lg font-semibold text-white/90 mb-8 italic">
               {win === "draw"
@@ -42,7 +43,10 @@ export default function Floating({ win, setWin }: FloatingProps) {
               Continue →
             </button>
             <button
-              onClick={() => setWin(null)}
+              onClick={() => {
+                setWin(null);
+                router.push("/");
+              }}
               className="px-8 py-3 mt-5 text-lg font-bold uppercase 
                      bg-rose-400 text-neutral-700 rounded-full 
                      shadow-lg shadow-black/40 hover:scale-110 

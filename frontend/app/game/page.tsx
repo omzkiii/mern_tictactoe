@@ -11,12 +11,12 @@ export type PlayerStats = {
 };
 
 export default function Game() {
-  // const playerContext = useContext(PlayersContext);
-  // if (!playerContext) {
-  //   throw new Error("useContext must be used inside PlayersProvider");
-  // }
-  // const { players, setPlayers } = playerContext;
-  const [players, setPlayers] = useState(["paul", "polycarp"]);
+  const playerContext = useContext(PlayersContext);
+  if (!playerContext) {
+    throw new Error("useContext must be used inside PlayersProvider");
+  }
+  const { players, setPlayers } = playerContext;
+  // const [players, setPlayers] = useState(["paul", "polycarp"]);
   const [player1, setPlayer1] = useState<PlayerStats>({
     name: players[0],
     symbol: "X",
@@ -79,7 +79,7 @@ export default function Game() {
   }
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-center font-sans p-6 transition-colors duration-700 ${
+      className={`min-h-screen flex flex-col items-center justify-center font-sans p-6 transition-colors duration-700 transition-all duration-2000 ease-in-out opacity-0 animate-fadeIn ${
         activePlayer.symbol === "X"
           ? "bg-gradient-to-br from-pink-500 via-rose-500 to-red-500"
           : "bg-gradient-to-br from-blue-200 via-cyan-500 to-sky-700"
