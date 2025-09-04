@@ -1,5 +1,4 @@
 "use client";
-
 import { getMatches } from "@/controllers/match";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
@@ -50,6 +49,16 @@ export default function Matches({ setMatches }: MatchesProps) {
               <p className="mt-1 text-sm text-white/80">
                 Recent battles — who reigned supreme?
               </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={onClose}
+                aria-label="close"
+                className="relative inline-flex items-center justify-center px-3 py-2 rounded-xl
+                          bg-white/10 backdrop-blur text-white hover:bg-white/20 transition"
+              >
+                ✕
+              </button>
             </div>
           </div>
 

@@ -1,3 +1,4 @@
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export type Match = {
   player1: { name: string; score: number };
   player2: { name: string; score: number };
@@ -5,7 +6,7 @@ export type Match = {
   time: string;
 };
 export async function saveData(match: Match) {
-  const response = await fetch("http://localhost:5000/saveMatch", {
+  const response = await fetch(`${apiUrl}/saveMatch`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +18,7 @@ export async function saveData(match: Match) {
   console.log(data);
 }
 export async function getMatches() {
-  const response = await fetch("http://localhost:5000/getMatches", {
+  const response = await fetch(`${apiUrl}/getMatches`, {
     method: "GET",
   });
 
