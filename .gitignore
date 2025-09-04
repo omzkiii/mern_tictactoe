@@ -17,3 +17,6 @@ logs
 *.log
 logs/**/*.log
 
+
+# Next
+.next
