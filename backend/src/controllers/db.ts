@@ -1,5 +1,8 @@
 import { MongoClient } from "mongodb";
-const url = "mongodb://mongo:mypass@db:27017";
+
+import dotenv from "dotenv";
+dotenv.config();
+const url = process.env.DB ?? "";
 export const client = new MongoClient(url);
 
 export async function connectDB() {

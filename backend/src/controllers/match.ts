@@ -1,4 +1,4 @@
-import { connectDB } from "./db.ts";
+import { connectDB } from "./db.js";
 
 type Match = {
   player1: { name: string; score: number };
