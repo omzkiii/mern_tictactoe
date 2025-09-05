@@ -5,6 +5,8 @@ import { checkWin } from "@/controllers/checkWin";
 import Floating from "@/components/Floating";
 import Scoreboard from "@/components/Scoreboard";
 import { useRouter } from "next/navigation";
+import { Match, save } from "@/controllers/match";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export type PlayerStats = {
   name: string;
@@ -17,6 +19,10 @@ export default function Game() {
     if (players.length < 2) {
       router.push("/");
     }
+    navigator.sendBeacon(
+      `${apiUrl}/saveMatch`,
+      JSON.stringify(save(player1, player2)),
+    );
   }, []);
   const router = useRouter();
   const playerContext = useContext(PlayersContext);

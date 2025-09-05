@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import { Match, saveData } from "@/controllers/match";
 import { PlayerStats } from "@/app/game/page";
+import { save, saveData } from "@/controllers/match";
 type FloatingProps = {
   win: string | null;
   setWin: Dispatch<SetStateAction<string | null | undefined>>;
@@ -15,23 +15,6 @@ export default function Floating({
   player1,
   player2,
 }: FloatingProps) {
-  function save() {
-    const winner = player1.score > player2.score ? player1.name : player2.name;
-    const now = new Date();
-    const matchData: Match = {
-      player1: {
-        name: player1.name,
-        score: player1.score,
-      },
-      player2: {
-        name: player2.name,
-        score: player2.score,
-      },
-      winner: winner,
-      time: now.toLocaleString(),
-    };
-    saveData(matchData);
-  }
   const router = useRouter();
   return (
     <div>
@@ -69,10 +52,10 @@ export default function Floating({
               Continue →
             </button>
             <button
-              onClick={() => {
+              onClick={async () => {
                 setWin(null);
                 router.push("/");
-                save();
+                await saveData(save(player1, player2));
               }}
               className="px-8 py-3 mt-5 text-lg font-bold uppercase 
                      bg-rose-400 text-neutral-700 rounded-full 

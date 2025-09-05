@@ -15,6 +15,7 @@ type MatchesProps = {
 };
 export default function Matches({ setMatches }: MatchesProps) {
   const [matchList, setMatchList] = useState<Match[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchMatches = async () => {
       try {
@@ -22,6 +23,8 @@ export default function Matches({ setMatches }: MatchesProps) {
         setMatchList(data);
       } catch (error) {
         console.error("Failed to fetch matches", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -63,7 +66,13 @@ export default function Matches({ setMatches }: MatchesProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[60vh] overflow-y pr-2">
-            {matchList.length === 0 ? (
+            {isLoading ? (
+              <div className="col-span-full flex flex-col items-center justify-center p-8 animate-pulse">
+                <p className="text-white text-lg md:text-xl font-bold uppercase tracking-wider animate-bounce">
+                  Loading matches...
+                </p>
+              </div>
+            ) : matchList.length === 0 ? (
               <div className="col-span-full flex items-center justify-center p-8">
                 <div className="text-center text-white/80">
                   <div className="font-semibold text-lg">No matches yet</div>
@@ -121,8 +130,6 @@ export default function Matches({ setMatches }: MatchesProps) {
               ))
             )}
           </div>
-
-          {/* footer actions */}
           <div className="mt-6 flex items-center justify-between gap-4">
             <div className="text-sm text-white/80">
               Total:{" "}
